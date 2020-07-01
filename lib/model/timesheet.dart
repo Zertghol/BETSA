@@ -90,7 +90,7 @@ class TimeSheet{
 
   Map<String, dynamic> toMap() {
     return {
-      'sent': sent,
+      'sent': 0,
       'name': name,
       'jobNo': jobNo,
       'jobName': jobName,

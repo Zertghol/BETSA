@@ -342,8 +342,10 @@ class _TimeSheetScreenState extends State<TimeSheetScreen> {
 
                     child: (widget.ts.sent.toString() != null) ? Text('Update') : Text('Add'),
                     onPressed: () {
+
                       print(widget.ts.sent.toString());
                       if (widget.ts.sent != null) {
+                        print(3);
                         db.updateTimeSheet(TimeSheet.fromMap({
                           'sent': 0,
                           'name': _nameController.text,
@@ -375,6 +377,7 @@ class _TimeSheetScreenState extends State<TimeSheetScreen> {
                           Navigator.pop(context, 'update');
                         });
                       }else {
+                        print(4);
                         db.saveTimeSheet(TimeSheet(_nameController.text, int.parse(_jobNoController.text), _jobNameController.text, _weekController.text, int.parse(_monHoursController.text), int.parse(_monOTController.text), int.parse(_monDTController.text), int.parse(_tueHoursController.text), int.parse(_tueOTController.text), int.parse(_tueDTController.text), int.parse(_wedHoursController.text), int.parse(_wedOTController.text), int.parse(_wedDTController.text), int.parse(_thurHoursController.text), int.parse(_thurOTController.text), int.parse(_thurDTController.text), int.parse(_friHoursController.text), int.parse(_friOTController.text), int.parse(_friDTController.text), int.parse(_satHoursController.text), int.parse(_satOTController.text), int.parse(_satDTController.text), int.parse(_sunHoursController.text), int.parse(_sunOTController.text),int.parse(_sunDTController.text))).then((_) {
                           Navigator.pop(context, 'save');
                         });

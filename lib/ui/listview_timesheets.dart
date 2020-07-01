@@ -60,7 +60,6 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
                       ),
                       leading: Column(
                         children: <Widget>[
-                          Padding(padding: EdgeInsets.all(10.0)),
                           CircleAvatar(
                             backgroundColor: Colors.blueAccent,
                             radius: 15.0,
@@ -97,6 +96,8 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
       context,
       MaterialPageRoute(builder: (context) => TimeSheetScreen(ts)),
     );
+
+    print(1);
     print(result);
 
     if (result == 'update') {
@@ -116,6 +117,8 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
       context,
       MaterialPageRoute(builder: (context) => TimeSheetScreen(TimeSheet('', 0,'','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))),
     );
+
+    print(2);
     print(result);
     if (result == 'save') {
       db.getAllTimeSheets().then((tss) {
