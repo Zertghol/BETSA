@@ -15,7 +15,6 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
   @override
   void initState() {
     super.initState();
-
     db.getAllTimeSheets().then((tss) {
       setState(() {
         tss.forEach((timesheet) {
@@ -66,14 +65,49 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
                           ),
                           IconButton(
                               icon: const Icon(Icons.remove_circle_outline),
-                              onPressed: () => _deleteTimeSheet(context, items[position], position)),
+                              onPressed: () => _deleteTimeSheet(
+                                  context, items[position], position)),
                         ],
                       ),
-                      onTap: () => _navigateToTimeSheet(context, items[position]),
+                      onTap: () =>
+                          _navigateToTimeSheet(context, items[position]),
                     ),
                   ],
                 );
               }),
+        ),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Drawer Header'),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+              ),
+              ListTile(
+                title: Text('New Time Sheet'),
+                onTap: () {
+                  Icon(Icons.add);
+                  _createNewTimeSheet(context);
+                },
+              ),
+              ListTile(
+                title: Text('Send Time Sheets'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
@@ -83,7 +117,8 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
     );
   }
 
-  void _deleteTimeSheet(BuildContext context, TimeSheet ts, int position) async {
+  void _deleteTimeSheet(
+      BuildContext context, TimeSheet ts, int position) async {
     db.deleteTimeSheet(ts.jobNo, ts.week).then((tss) {
       setState(() {
         items.removeAt(position);
@@ -115,7 +150,9 @@ class _ListViewTimeSheetState extends State<ListViewTimeSheet> {
   void _createNewTimeSheet(BuildContext context) async {
     String result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TimeSheetScreen(TimeSheet('', 0,'','',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))),
+      MaterialPageRoute(
+          builder: (context) => TimeSheetScreen(TimeSheet('', 0, '', '', 0, 0,
+              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))),
     );
 
     print(2);
